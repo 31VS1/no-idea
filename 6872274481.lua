@@ -5008,7 +5008,7 @@ runcode(function()
 				holdingshift = false
 			end
 		end,
-		HoverText = "Lets you climb up walls"
+		HoverText = "Lets you climb up walls",
 		["ExtraText"] = function() 
 			if GuiLibrary.ObjectsThatCanBeSaved["Text GUIAlternate TextToggle"]["Api"].Enabled then 
 				return alternatelist[table.find(spidermode["List"], spidermode.Value)]
