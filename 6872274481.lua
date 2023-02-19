@@ -5009,6 +5009,12 @@ runcode(function()
 			end
 		end,
 		HoverText = "Lets you climb up walls"
+		["ExtraText"] = function() 
+			if GuiLibrary.ObjectsThatCanBeSaved["Text GUIAlternate TextToggle"]["Api"].Enabled then 
+				return alternatelist[table.find(spidermode["List"], spidermode.Value)]
+			end
+			return spidermode.Value 
+		end
 	})
 	spidermode = Spider.CreateDropdown({
 		Name = "Mode",
@@ -10124,6 +10130,13 @@ runcode(function()
 			else
 				bedwars.ProjectileController.calculateImportantLaunchValues = oldaim
 			end
+		end,
+		HoverText = "Makes you go zoom (longer fly discovered by exelys and Cqded)",
+		["ExtraText"] = function() 
+			if GuiLibrary.ObjectsThatCanBeSaved["Text GUIAlternate TextToggle"]["Api"].Enabled then 
+				return alternatelist[table.find(flymode["List"], flymode.Value)]
+			end
+			return flymode.Value 
 		end
 	})
 	BowAimbotPart = BowAimbot.CreateDropdown({
