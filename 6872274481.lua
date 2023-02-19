@@ -10134,9 +10134,9 @@ runcode(function()
 		HoverText = "Makes you go zoom (longer fly discovered by exelys and Cqded)",
 		["ExtraText"] = function() 
 			if GuiLibrary.ObjectsThatCanBeSaved["Text GUIAlternate TextToggle"]["Api"].Enabled then 
-				return alternatelist[table.find(flymode["List"], flymode.Value)]
+				return alternatelist[table.find(BowAimbotPart["List"], BowAimbotPart.Value)]
 			end
-			return flymode.Value 
+			return BowAimbotPart.Value 
 		end
 	})
 	BowAimbotPart = BowAimbot.CreateDropdown({
