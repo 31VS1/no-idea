@@ -8800,6 +8800,7 @@ runcode(function()
 											createwarning("MissileTP", "Player died before it could TP.", 3)
 											break
 										end
+									end
 								until projectile.model.Parent == nil
 							else
 								createwarning("MissileTP", "Missile on cooldown.", 3)
@@ -8816,6 +8817,7 @@ runcode(function()
 		end,
 		HoverText = "Spawns and teleports a missile to a player\nnear your mouse."
 	})
+
 
 	local RavenTP = {Enabled = false}
 	RavenTP = GuiLibrary.ObjectsThatCanBeSaved.UtilityWindow.Api.CreateOptionsButton({
