@@ -2012,9 +2012,22 @@ local function GetNearestHumanoidToPosition(player, distance, overridepos)
 				if overridepos and mag > distance then 
 					mag = (overridepos - v3.PrimaryPart.Position).magnitude
 				end
-                if mag <= closest then -- magcheck
+                                 if mag <= closest then -- magcheck
 					closest = mag
                     returnedplayer = {Player = {Name = "Drone", UserId = 1443379645}, Character = v3, RootPart = v3.PrimaryPart} -- monsters are npcs so I have to create a fake player for target info
+                end
+		for i3,v3 in pairs(collectionservice:GetTagged("Model")) do -- drone
+			if v3.PrimaryPart then
+				if tonumber(v3:GetAttribute("PlayerUserId")) == lplr.UserId then continue end
+				local droneplr = players:GetPlayerByUserId(v3:GetAttribute("PlayerUserId"))
+				if droneplr and droneplr.Team == lplr.Team then continue end
+				local mag = (entityLibrary.character.HumanoidRootPart.Position - v3.PrimaryPart.Position).magnitude
+				if overridepos and mag > distance then 
+					mag = (overridepos - v3.PrimaryPart.Position).magnitude
+				end
+                if mag <= closest then -- magcheck
+					closest = mag
+                    returnedplayer = {Player = {Name = "Model", UserId = 60596019}, Character = v3, RootPart = v3.PrimaryPart} -- monsters are npcs so I have to create a fake player for target info
                 end
 			end
 		end
