@@ -11087,7 +11087,7 @@ runcode(function()
 							local textcompare = obj.Parent.TextColor3
 							if textcompare ~= Color3.fromRGB(85, 255, 85) then
 								local newtween = game:GetService("TweenService"):Create(obj.Parent, TweenInfo.new(0.5, Enum.EasingStyle.Linear), {
-									TextColor3 = (textcompare == Color3.fromRGB(76, 175, 93) and Color3.new(0, 0, 0) or Color3.new(0, 0, 0))
+									TextColor3 = (textcompare == Color3.fromRGB(76, 175, 93) and Color3.new(1, 1, 1) or Color3.new(0, 0, 0))
 								})
 								task.wait(0.15)
 								newtween:Play()
@@ -11096,11 +11096,7 @@ runcode(function()
 						return game:GetService("TweenService"):Create(obj, ...)
 					end
 				})
-				local colorcorrection = Instance.new("ColorCorrectionEffect")
-				colorcorrection.TintColor = Color3.fromRGB(255, 199, 220)
-				colorcorrection.Brightness = 0.05
-				colorcorrection.Parent = lighting
-				debug.setconstant(require(lplr.PlayerScripts.TS.controllers.global.hotbar.ui.healthbar["hotbar-healthbar"]).HotbarHealthbar.render, 16, 16745650)
+				debug.setconstant(require(lplr.PlayerScripts.TS.controllers.global.hotbar.ui.healthbar["hotbar-healthbar"]).HotbarHealthbar.render, 16, 4653055)
 			end)
 		end
 	}
