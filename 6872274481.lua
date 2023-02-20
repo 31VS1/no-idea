@@ -5008,13 +5008,7 @@ runcode(function()
 				holdingshift = false
 			end
 		end,
-		HoverText = "Lets you climb up walls",
-		["ExtraText"] = function() 
-			if GuiLibrary.ObjectsThatCanBeSaved["Text GUIAlternate TextToggle"]["Api"].Enabled then 
-				return alternatelist[table.find(spidermode["List"], spidermode.Value)]
-			end
-			return spidermode.Value 
-		end
+		HoverText = "Lets you climb up walls"
 	})
 	spidermode = Spider.CreateDropdown({
 		Name = "Mode",
@@ -10157,6 +10151,7 @@ runcode(function()
 		Default = true
 	})
 end)
+
 
 runcode(function()
 	tpstring = shared.vapeoverlay or nil
