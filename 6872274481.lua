@@ -11052,7 +11052,7 @@ runcode(function()
 				debug.setconstant(require(lplr.PlayerScripts.TS.controllers.global.hotbar.ui.healthbar["hotbar-healthbar"]).HotbarHealthbar.render, 16, 16745650)
 			end)
 		end,
-                    cool = function()
+                    NightSky = function()
 			task.spawn(function()
 				for i,v in pairs(lighting:GetChildren()) do
 					if v:IsA("Atmosphere") or v:IsA("Sky") or v:IsA("PostEffect") then
@@ -11122,7 +11122,7 @@ runcode(function()
 	themeselected = OldBedwars.CreateDropdown({
 		Name = "Theme",
 		Function = function() end,
-		List = {"Old", "Winter", "Halloween", "Valentines","cool"}
+		List = {"Old", "Winter", "Halloween", "Valentines","NightSky"}
 	})
 end)
 
