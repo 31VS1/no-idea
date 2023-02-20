@@ -11051,6 +11051,57 @@ runcode(function()
 				colorcorrection.Parent = lighting
 				debug.setconstant(require(lplr.PlayerScripts.TS.controllers.global.hotbar.ui.healthbar["hotbar-healthbar"]).HotbarHealthbar.render, 16, 16745650)
 			end)
+		end,
+                    cool = function()
+			task.spawn(function()
+				for i,v in pairs(lighting:GetChildren()) do
+					if v:IsA("Atmosphere") or v:IsA("Sky") or v:IsA("PostEffect") then
+						v:Remove()
+					end
+				end
+				local sky = Instance.new("Sky")
+				sky.SkyboxBk = "rbxassetid://12064107"
+				sky.SkyboxDn = "rbxassetid://12064152"
+				sky.SkyboxFt = "rbxassetid://12064121"
+				sky.SkyboxLf = "rbxassetid://12063984"
+				sky.SkyboxRt = "rbxassetid://12064115"
+				sky.SkyboxUp = "rbxassetid://12064131"
+				sky.Parent = lighting
+				pcall(function() workspace.Clouds:Destroy() end)
+				local damagetab = debug.getupvalue(bedwars["DamageIndicator"], 2)
+				damagetab.strokeThickness = false
+				damagetab.textSize = 32
+				damagetab.blowUpDuration = 0
+				damagetab.baseColor = Color3.fromRGB(255, 132, 178)
+				damagetab.blowUpSize = 32
+				damagetab.blowUpCompleteDuration = 0
+				damagetab.anchoredDuration = 0
+				debug.setconstant(bedwars["DamageIndicator"], 83, Enum.Font.LuckiestGuy)
+				debug.setconstant(bedwars["DamageIndicator"], 102, "Enabled")
+				debug.setconstant(bedwars["DamageIndicator"], 118, 0.3)
+				debug.setconstant(bedwars["DamageIndicator"], 128, 0.5)
+				debug.setupvalue(bedwars["DamageIndicator"], 10, {
+					Create = function(self, obj, ...)
+						task.spawn(function()
+							obj.Parent.Parent.Parent.Parent.Velocity = Vector3.new((math.random(-50, 50) / 100) * damagetab.velX, (math.random(50, 60) / 100) * damagetab.velY, (math.random(-50, 50) / 100) * damagetab.velZ)
+							local textcompare = obj.Parent.TextColor3
+							if textcompare ~= Color3.fromRGB(85, 255, 85) then
+								local newtween = game:GetService("TweenService"):Create(obj.Parent, TweenInfo.new(0.5, Enum.EasingStyle.Linear), {
+									TextColor3 = (textcompare == Color3.fromRGB(76, 175, 93) and Color3.new(0, 0, 0) or Color3.new(0, 0, 0))
+								})
+								task.wait(0.15)
+								newtween:Play()
+							end
+						end)
+						return game:GetService("TweenService"):Create(obj, ...)
+					end
+				})
+				local colorcorrection = Instance.new("ColorCorrectionEffect")
+				colorcorrection.TintColor = Color3.fromRGB(255, 199, 220)
+				colorcorrection.Brightness = 0.05
+				colorcorrection.Parent = lighting
+				debug.setconstant(require(lplr.PlayerScripts.TS.controllers.global.hotbar.ui.healthbar["hotbar-healthbar"]).HotbarHealthbar.render, 16, 16745650)
+			end)
 		end
 	}
 
@@ -11075,7 +11126,7 @@ runcode(function()
 	themeselected = OldBedwars.CreateDropdown({
 		Name = "Theme",
 		Function = function() end,
-		List = {"Old", "Winter", "Halloween", "Valentines"}
+		List = {"Old", "Winter", "Halloween", "Valentines","cool"}
 	})
 end)
 
