@@ -1353,8 +1353,8 @@ local function getSpeedMultiplier(reduce)
 	local speed = 1
 	if lplr.Character then 
 		local speedboost = lplr.Character:GetAttribute("SpeedBoost")
-		if speedboost and speedboost > 1 then 
-			speed = speed + (speedboost - 1)
+		if speedboost and speedboost > 3 then 
+			speed = speed + (speedboost - 3)
 		end
 		if lplr.Character:GetAttribute("GrimReaperChannel") then 
 			speed = speed + 0.6
