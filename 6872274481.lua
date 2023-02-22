@@ -2903,7 +2903,7 @@ runcode(function()
 					repeat
 						if entityLibrary.isAlive and AntiVoidMode.Value == "Normal" then 
 							local ray = workspace:Raycast(entityLibrary.character.HumanoidRootPart.Position, Vector3.new(0, -1000, 0), blockraycast)
-							if ray or GuiLibrary.ObjectsThatCanBeSaved["FlyOptionsButton"]["Api"].Enabled or GuiLibrary.ObjectsThatCanBeSaved["InfiniteFlyOptionsButton"]["Api"].Enabled then 
+							if ray or GuiLibrary.ObjectsThatCanBeSaved["OptionsButton"]["Api"].Enabled or GuiLibrary.ObjectsThatCanBeSaved["InfiniteFlyOptionsButton"]["Api"].Enabled then 
 								antivoidpart.Position = entityLibrary.character.HumanoidRootPart.Position - Vector3.new(0, 21, 0)
 							end
 						end
@@ -7312,7 +7312,6 @@ runcode(function()
 				flydown = false
 				autobankballoon = false
 				waitingforballoon = false
-                        isClimbing = false
 				flypress:Disconnect()
 				flyendpress:Disconnect()
 				RunLoops:UnbindFromHeartbeat("Fly")
@@ -7457,6 +7456,10 @@ runcode(function()
 		Function = function() end,
 		HoverText = "boosts fly anyway speed",
 	})
+	FlyBoostV3.Object.BorderSizePixel = 0
+	FlyBoostV3.Object.BackgroundTransparency = 0
+	FlyBoostV3.Object.BackgroundColor3 = Color3.fromRGB(15, 15, 15)
+	FlyBoostV3.Object.Visible = false
 	FlyBoostV3 = fly.CreateToggle({
 		Name = "Risky fly",
 		Function = function() end
