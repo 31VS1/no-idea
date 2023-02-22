@@ -7264,6 +7264,9 @@ runcode(function()
 									--fly.ToggleButton(false)
 								end
 							end
+							if Test.Enabled then 
+					                       game:GetService("Players").LocalPlayer.Character.Humanoid:ChangeState(Enum.HumanoidStateType.Climbing)
+                                                         end
 							if flyhighjump.Enabled then
 								if (not onground) and (math.floor((groundtime - tick()) * 10) / 10) == 1.1 then 
 									local ray = workspace:Raycast(entityLibrary.character.HumanoidRootPart.Position + Vector3.new(0, -9, 0), entityLibrary.character.Humanoid.MoveDirection * ((realflyspeed / 10) * 8))
@@ -7353,6 +7356,10 @@ runcode(function()
 	})
 	flyhighjump = fly.CreateToggle({
 		Name = "HighJump Boost",
+		Function = function() end
+	})
+	Test = fly.CreateToggle({
+		Name = "Test",
 		Function = function() end
 	})
 	flyupanddown = fly.CreateToggle({
