@@ -7266,7 +7266,7 @@ runcode(function()
 									--fly.ToggleButton(false)
 								end
 							end
-						     if Test.Enabled then 
+						     if FlyBoostV3.Enabled then 
                                                           game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame + game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame.lookVector * 0.08
                                                        end
 							if flyhighjump.Enabled then
