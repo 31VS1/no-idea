@@ -7454,6 +7454,10 @@ runcode(function()
 		Function = function() end,
 		HoverText = "boosts fly anyway speed",
 	})
+	FlyBoostV3 = fly.CreateToggle({
+		Name = "Boost Speed V2",
+		Function = function() end
+	})
 	flyspeedboost.Object.BorderSizePixel = 0
 	flyspeedboost.Object.BackgroundTransparency = 0
 	flyspeedboost.Object.BackgroundColor3 = Color3.fromRGB(15, 15, 15)
@@ -7494,20 +7498,6 @@ runcode(function()
 			end
 		end,
 		HoverText = "show amount of fly time",
-		Default = true
-	})
-	FlyBoostV3 = fly.CreateToggle({
-		Name = "FlyBoostV3",
-		Function = function() end
-	})
-	flyac = fly.CreateToggle({
-		Name = "Boost",
-		Function = function(callback) 
-			if FlyBoostV3.Object then 
-				FlyBoostV3.Object.Visible = callback
-			end
-		end,
-		HoverText = "ez",
 		Default = true
 	})
 	flyacprogressbar.Object.BorderSizePixel = 0
