@@ -7219,6 +7219,9 @@ runcode(function()
 					shared.damageanim()
 					bedwars.SoundManager:playSound(bedwars.SoundList["DAMAGE_"..math.random(1, 3)])
 				end
+				if Config.Enabled then 
+					GuiLibrary.ObjectsThatCanBeSaved.flyspeed.Api.SetValue.(74)
+				end
 				if flyacprogressbarframe and allowed <= 0 and (not balloons) then 
 					flyacprogressbarframe.Visible = true
 					flyacprogressbarframe.Frame:TweenSize(UDim2.new(1, 0, 0, 20), Enum.EasingDirection.InOut, Enum.EasingStyle.Linear, 0, true)
