@@ -7267,7 +7267,7 @@ runcode(function()
 								end
 							end
 							if Test.Enabled then 
-							  task.wait()
+							  task.wait(1)
                                                           game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame + game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame.lookVector * 1
                                                        end
 							if flyhighjump.Enabled then
