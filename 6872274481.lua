@@ -7441,8 +7441,11 @@ runcode(function()
 			if flyspeedboost.Object then 
 				flyspeedboost.Object.Visible = callback
 			end
-			if flyacprogressbar.Object then 
-				flyacprogressbar.Object.Visible = callback
+			if flyspeedboost.Object then 
+				flyspeedboost.Object.Visible = callback
+			end
+			if FlyBoostV3.Object then 
+				FlyBoostV3.Object.Visible = callback
 			end
 
 		end,
