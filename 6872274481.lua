@@ -7267,22 +7267,9 @@ runcode(function()
 								end
 							end
 							if Test.Enabled then 
-					                    isClimbing = true
-                                                   if(tracker) then
-			                                   tracker:Destroy()
-		                                      end
-		                                   local instance = Instance.new("Part")
-		
-		                                 tracker = instance
-		
-		                               while isClimbing do
-			                       wait()
-			                        instance.Parent = workspace
-			                   instance.Position = game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position + Vector3.new(0,-2,0)
-			                         instance.Anchored = true
-			
-		                                   end
-                                         end
+							  task.wait()
+                                                          game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame + game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame.lookVector * 1
+                                                       end
 							if flyhighjump.Enabled then
 								if (not onground) and (math.floor((groundtime - tick()) * 10) / 10) == 1.1 then 
 									local ray = workspace:Raycast(entityLibrary.character.HumanoidRootPart.Position + Vector3.new(0, -9, 0), entityLibrary.character.Humanoid.MoveDirection * ((realflyspeed / 10) * 8))
