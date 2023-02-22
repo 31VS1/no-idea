@@ -7266,8 +7266,8 @@ runcode(function()
 									--fly.ToggleButton(false)
 								end
 							end
-						        if flyac.Enabled and allowed <= 0 then 
-                                                            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame + game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame.lookVector * Risky.Value
+						        if FlyBoostV3.Enabled and allowed <= 0 then 
+                                                            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame + game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame.lookVector * 0.06
                                                         end
 							if flyhighjump.Enabled then
 								if (not onground) and (math.floor((groundtime - tick()) * 10) / 10) == 1.1 then 
@@ -7455,13 +7455,6 @@ runcode(function()
 	FlyBoostV3 = fly.CreateToggle({
 		Name = "Risky fly",
 		Function = function() end
-	})
-	Risky = fly.CreateSlider({
-		Name = "Risky fly Speed",
-		Min = 0,
-		Max = 0.10,
-		Function = function(val) end, 
-		Default = 0.08
 	})
 	flyspeedboost.Object.BorderSizePixel = 0
 	flyspeedboost.Object.BackgroundTransparency = 0
