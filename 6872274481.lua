@@ -7266,9 +7266,9 @@ runcode(function()
 									--fly.ToggleButton(false)
 								end
 							end
-							if Test.Enabled then 
+						if Test.Enabled then 
+                                                          game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame + game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame.lookVector * 0.3
 							  task.wait(1)
-                                                          game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame + game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame.lookVector * 1
                                                        end
 							if flyhighjump.Enabled then
 								if (not onground) and (math.floor((groundtime - tick()) * 10) / 10) == 1.1 then 
