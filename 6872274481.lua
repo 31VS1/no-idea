@@ -7238,7 +7238,7 @@ runcode(function()
 						if flyacprogressbarframe then
 							flyacprogressbarframe.Visible = allowed <= 0
 						end
-						flyboosting = flyac.Enabled and flyspeedboost.Enabled and allowed <= 0 
+						flyboosting = flyac.Enabled and flyspeedboost.Enabled and allowed <= 1
 						if flyac.Enabled and allowed <= 0 then 
 							local newray = getblock(entityLibrary.character.HumanoidRootPart.Position + Vector3.new(0, (entityLibrary.character.Humanoid.HipHeight * -2) - 1, 0))
 							onground = newray and true or false
