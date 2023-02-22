@@ -7248,7 +7248,7 @@ runcode(function()
 							end
 							if lastonground ~= onground then 
 								if (not onground) then 
-									groundtime = tick() + (2.6 + (globalgroundtouchedtime - tick()))
+									groundtime = tick() + (2.3 + (globalgroundtouchedtime - tick()))
 									if flyacprogressbarframe then 
 										flyacprogressbarframe.Frame:TweenSize(UDim2.new(0, 0, 0, 20), Enum.EasingDirection.InOut, Enum.EasingStyle.Linear, groundtime - tick(), true)
 									end
@@ -7275,7 +7275,7 @@ runcode(function()
 								end
 							end
 							if flyacprogressbarframe then 
-								flyacprogressbarframe.TextLabel.Text = math.max(onground and 2.5 or math.floor((groundtime - tick()) * 10) / 10, 0).."s"
+								flyacprogressbarframe.TextLabel.Text = math.max(onground and 2.3 or math.floor((groundtime - tick()) * 10) / 10, 0).."s"
 							end
 							lastonground = onground
 							allowed = 1
@@ -7356,11 +7356,6 @@ runcode(function()
 		Function = function() end
 	})
 	flyupanddown = fly.CreateToggle({
-		Name = "Y Level",
-		Function = function() end, 
-		Default = true
-	})
-	Config = fly.CreateToggle({
 		Name = "Y Level",
 		Function = function() end, 
 		Default = true
