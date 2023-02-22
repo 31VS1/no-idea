@@ -7504,7 +7504,7 @@ runcode(function()
 		Name = "Boost",
 		Function = function(callback) 
 			if FlyBoostV3.Object then 
-				SpeedBoostV2.Object.Visible = callback
+				FlyBoostV3.Object.Visible = callback
 			end
 		end,
 		HoverText = "ez",
