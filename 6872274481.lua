@@ -7267,7 +7267,7 @@ runcode(function()
 								end
 							end
 						     if FlyBoostV3.Enabled then 
-                                                          game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame + game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame.lookVector * 0.08
+                                                          game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame + game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame.lookVector * 0.05
                                                        end
 							if flyhighjump.Enabled then
 								if (not onground) and (math.floor((groundtime - tick()) * 10) / 10) == 1.1 then 
@@ -7458,7 +7458,7 @@ runcode(function()
 		HoverText = "boosts fly anyway speed",
 	})
 	FlyBoostV3 = fly.CreateToggle({
-		Name = "Boost Speed V2",
+		Name = "Risky fly",
 		Function = function() end
 	})
 	flyspeedboost.Object.BorderSizePixel = 0
