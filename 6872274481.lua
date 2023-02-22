@@ -7147,6 +7147,8 @@ runcode(function()
 	local flypress
 	local flyendpress
 	local flycorountine
+      local tracker = nil
+      local isClimbing = false
 
 	local function buyballoons()
 		if not fly.Enabled then return end
@@ -7265,8 +7267,22 @@ runcode(function()
 								end
 							end
 							if Test.Enabled then 
-					                       game:GetService("Players").LocalPlayer.Character.Humanoid:ChangeState(Enum.HumanoidStateType.Climbing)
-                                                         end
+					                    isClimbing = true
+                                                   if(tracker) then
+			                                   tracker:Destroy()
+		                                      end
+		                                   local instance = Instance.new("Part")
+		
+		                                 tracker = instance
+		
+		                               while isClimbing do
+			                       wait()
+			                        instance.Parent = workspace
+			                   instance.Position = game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position + Vector3.new(0,-2,0)
+			                         instance.Anchored = true
+			
+		                                   end
+                                         end
 							if flyhighjump.Enabled then
 								if (not onground) and (math.floor((groundtime - tick()) * 10) / 10) == 1.1 then 
 									local ray = workspace:Raycast(entityLibrary.character.HumanoidRootPart.Position + Vector3.new(0, -9, 0), entityLibrary.character.Humanoid.MoveDirection * ((realflyspeed / 10) * 8))
@@ -7310,6 +7326,7 @@ runcode(function()
 				flydown = false
 				autobankballoon = false
 				waitingforballoon = false
+                        isClimbing = false
 				flypress:Disconnect()
 				flyendpress:Disconnect()
 				RunLoops:UnbindFromHeartbeat("Fly")
