@@ -7363,6 +7363,11 @@ runcode(function()
 		Function = function() end, 
 		Default = true
 	})
+	Config = fly.CreateToggle({
+		Name = "Y Level",
+		Function = function() end, 
+		Default = true
+	})
 	flypop = fly.CreateToggle({
 		Name = "Pop Balloon",
 		Function = function() end, 
