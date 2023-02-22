@@ -7443,10 +7443,6 @@ runcode(function()
 			if flyspeedboost.Object then 
 				flyspeedboost.Object.Visible = callback
 			end
-			if FlyBoostV3.Object then 
-				FlyBoostV3.Object.Visible = callback
-			end
-
 		end,
 		HoverText = "Enables fly without balloons for 1.4s",
 		Default = true
@@ -7456,10 +7452,6 @@ runcode(function()
 		Function = function() end,
 		HoverText = "boosts fly anyway speed",
 	})
-	FlyBoostV3.Object.BorderSizePixel = 0
-	FlyBoostV3.Object.BackgroundTransparency = 0
-	FlyBoostV3.Object.BackgroundColor3 = Color3.fromRGB(15, 15, 15)
-	FlyBoostV3.Object.Visible = false
 	FlyBoostV3 = fly.CreateToggle({
 		Name = "Risky fly",
 		Function = function() end
