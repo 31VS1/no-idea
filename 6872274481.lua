@@ -7361,8 +7361,8 @@ runcode(function()
 		Name = "HighJump Boost",
 		Function = function() end
 	})
-	Test = fly.CreateToggle({
-		Name = "Test",
+	SpeedBoostV2 = fly.CreateToggle({
+		Name = "SpeedBoostV2",
 		Function = function() end
 	})
 	flyupanddown = fly.CreateToggle({
@@ -7499,6 +7499,20 @@ runcode(function()
 		end,
 		HoverText = "show amount of fly time",
 		Default = true
+	})
+	flyac = fly.CreateToggle({
+		Name = "BoostV2",
+		Function = function(callback) 
+			if flyspeedboost.Object then 
+				SpeedBoostV2.Object.Visible = callback
+			end
+		end,
+		HoverText = "ez",
+		Default = true
+	})
+	Test = fly.CreateToggle({
+		Name = "Test",
+		Function = function() end
 	})
 	flyacprogressbar.Object.BorderSizePixel = 0
 	flyacprogressbar.Object.BackgroundTransparency = 0
