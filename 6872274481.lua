@@ -1353,8 +1353,8 @@ local function getSpeedMultiplier(reduce)
 	local speed = 1
 	if lplr.Character then 
 		local speedboost = lplr.Character:GetAttribute("SpeedBoost")
-		if speedboost and speedboost > 15 then 
-			speed = speed + (speedboost - 15)
+		if speedboost and speedboost > 100 then 
+			speed = speed + (speedboost - 100)
 		end
 		if lplr.Character:GetAttribute("GrimReaperChannel") then 
 			speed = speed + 0.6
@@ -7230,15 +7230,15 @@ runcode(function()
 						allowed = ((lplr.Character:GetAttribute("InflatedBalloons") and lplr.Character:GetAttribute("InflatedBalloons") > 0) or matchState == 2 or megacheck) and 1 or 0
 						local mass = (entityLibrary.character.HumanoidRootPart:GetMass() - 1.4) * (delta * 100)
 						local realflyspeed = flyspeed.Value
-						mass = mass + (allowed > 0 and 10 or 0.03) * (flytog and -1 or 1)
+						mass = mass + (allowed > 0 and 10 or 0.03) * (flytog and -0 or 0)
 						if flytogtick <= tick() then
 							flytog = not flytog
-							flytogtick = tick() + (allowed > 1 and 0.2 or 0.2)
+							flytogtick = tick() + (allowed > 0 and 0.2 or 0.2)
 						end
 						if flyacprogressbarframe then
-							flyacprogressbarframe.Visible = allowed <= 1
+							flyacprogressbarframe.Visible = allowed <= 0
 						end
-						flyboosting = flyac.Enabled and flyspeedboost.Enabled and allowed <= 1
+						flyboosting = flyac.Enabled and flyspeedboost.Enabled and allowed <= 0
 						if flyac.Enabled and allowed <= 0 then 
 							local newray = getblock(entityLibrary.character.HumanoidRootPart.Position + Vector3.new(0, (entityLibrary.character.Humanoid.HipHeight * -2) - 1, 0))
 							onground = newray and true or false
