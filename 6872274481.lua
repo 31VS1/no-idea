@@ -7233,7 +7233,7 @@ runcode(function()
 						mass = mass + (allowed > 0 and 10 or 0.03) * (flytog and -1 or 1)
 						if flytogtick <= tick() then
 							flytog = not flytog
-							flytogtick = tick() + (allowed > 0 and 0.2 or 0.2)
+							flytogtick = tick() + (allowed > 1 and 0.2 or 0.2)
 						end
 						if flyacprogressbarframe then
 							flyacprogressbarframe.Visible = allowed <= 0
@@ -7290,7 +7290,7 @@ runcode(function()
 						realflyspeed = (flymode.Value == "Normal" and allowspeed == false and 20 or realflyspeed) * allowed
 						local flypos = entityLibrary.character.Humanoid.MoveDirection * (flymode.Value == "Normal" and realflyspeed or math.min(realflyspeed, 20 * getSpeedMultiplier()))
 						local flypos2 = (entityLibrary.character.Humanoid.MoveDirection * math.max((realflyspeed) - 20, 0)) * delta
-						entityLibrary.character.HumanoidRootPart.Transparency = 1
+						entityLibrary.character.HumanoidRootPart.Transparency = 0
 						if funny then 
 							entityLibrary.character.HumanoidRootPart.Velocity = flypos + (Vector3.new(0, mass + (flyup and flyverticalspeed.Value or 0) + (flydown and -flyverticalspeed.Value or 0), 0) * allowed)
 						else
