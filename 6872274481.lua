@@ -7236,7 +7236,7 @@ runcode(function()
 							flytogtick = tick() + (allowed > 1 and 0.2 or 0.2)
 						end
 						if flyacprogressbarframe then
-							flyacprogressbarframe.Visible = allowed <= 0
+							flyacprogressbarframe.Visible = allowed <= 1
 						end
 						flyboosting = flyac.Enabled and flyspeedboost.Enabled and allowed <= 1
 						if flyac.Enabled and allowed <= 0 then 
