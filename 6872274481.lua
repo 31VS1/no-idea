@@ -3521,6 +3521,35 @@ runcode(function()
 	local shoothook
 	local bedwarsshopnpcs = {}
 	local shopnpcconnection
+	local armors = {
+		[1] = "leather_chestplate",
+		[2] = "iron_chestplate",
+		[3] = "diamond_chestplate",
+		[4] = "emerald_chestplate"
+	}
+
+	local swords = {
+		[1] = "wood_sword",
+		[2] = "stone_sword",
+		[3] = "iron_sword",
+		[4] = "diamond_sword",
+		[5] = "emerald_sword"
+	}
+
+	local axes = {
+		[1] = "wood_axe",
+		[2] = "stone_axe",
+		[3] = "iron_axe",
+		[4] = "diamond_axe"
+	}
+
+	local pickaxes = {
+		[1] = "wood_pickaxe",
+		[2] = "stone_pickaxe",
+		[3] = "iron_pickaxe",
+		[4] = "diamond_pickaxe"
+	}
+
 	task.spawn(function()
 		repeat task.wait() until matchState ~= 0
 		for i,v in pairs(collectionservice:GetTagged("BedwarsItemShop")) do
@@ -3564,13 +3593,6 @@ runcode(function()
 		return npc, not npccheck, enchant
 	end
 
-	local function getShopItem(itemType)
-		for i,v in pairs(bedwars["ShopItems"]) do 
-			if v.itemType == itemType then return v end
-		end
-		return nil
-	end
-
 	local function buyItem(itemtab, waitdelay)
 		local res
 		bedwars.ClientHandler:Get("BedwarsPurchaseItem"):CallServerAsync({
@@ -3608,21 +3630,39 @@ runcode(function()
 			end
 		end
 	end
-	
-	local armors = {
-		[1] = "leather_chestplate",
-		[2] = "iron_chestplate",
-		[3] = "diamond_chestplate",
-		[4] = "emerald_chestplate"
-	}
 
-	local swords = {
-		[1] = "wood_sword",
-		[2] = "stone_sword",
-		[3] = "iron_sword",
-		[4] = "diamond_sword",
-		[5] = "emerald_sword"
-	}
+	local function getAxeNear(inv)
+		for i5, v5 in pairs(inv or currentinventory.inventory.items) do
+			if v5.itemType:find("axe") and v5.itemType:find("pickaxe") == nil then
+				return v5.itemType
+			end
+		end
+		return nil
+	end
+
+	local function getPickaxeNear(inv)
+		for i5, v5 in pairs(inv or currentinventory.inventory.items) do
+			if v5.itemType:find("pickaxe") then
+				return v5.itemType
+			end
+		end
+		return nil
+	end
+
+	local function getShopItem(itemType)
+		if itemType == "axe" then 
+			itemType = getAxeNear() or "wood_axe"
+			itemType = axes[table.find(axes, itemType) + 1] or itemType
+		end
+		if itemType == "pickaxe" then 
+			itemType = getPickaxeNear() or "wood_pickaxe"
+			itemType = pickaxes[table.find(pickaxes, itemType) + 1] or itemType
+		end
+		for i,v in pairs(bedwars["ShopItems"]) do 
+			if v.itemType == itemType then return v end
+		end
+		return nil
+	end
 
 	local buyfunctions = {
 		Armor = function(inv, upgrades, shoptype) 
