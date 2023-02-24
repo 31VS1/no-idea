@@ -7306,9 +7306,11 @@ runcode(function()
 									--fly.ToggleButton(false)
 								end
 							end
+							if groundtime <= tick() and (not onground) then 
 						        if FlyBoostV3.Enabled and allowed <= 0 then 
                                                             game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame + game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame.lookVector * 0.06
                                                         end
+						     end
 							if flyhighjump.Enabled then
 								if (not onground) and (math.floor((groundtime - tick()) * 10) / 10) == 1.1 then 
 									local ray = workspace:Raycast(entityLibrary.character.HumanoidRootPart.Position + Vector3.new(0, -9, 0), entityLibrary.character.Humanoid.MoveDirection * ((realflyspeed / 10) * 8))
