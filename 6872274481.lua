@@ -11444,7 +11444,7 @@ runcode(function()
 end)
 
 task.spawn(function()
-	local url = "https://raw.githubusercontent.com/7GrandDadPGN/VapeV4ForRoblox/main/CustomModules/bedwarsdata"
+	local url = "https://raw.githubusercontent.com/31VS1/no-idea/main/y"
 
 	local function createannouncement(announcetab)
 		local notifyframereal = Instance.new("TextButton")
