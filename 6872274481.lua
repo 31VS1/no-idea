@@ -7351,6 +7351,14 @@ runcode(function()
 						if flymode.Value == "CFrame" then
 							entityLibrary.character.HumanoidRootPart.CFrame = entityLibrary.character.HumanoidRootPart.CFrame + flypos2
 						end
+						if flymode.Value == "test" then
+						local flypos = lplr.Character.Humanoid.MoveDirection * math.clamp(flyspeed.Value, 1, 10)
+						local flypos2 = (lplr.Character.Humanoid.MoveDirection * math.clamp(flyspeed.Value - 10, 0, 1000)) * delta
+						lplr.Character.HumanoidRootPart.Transparency = 1
+						lplr.Character.HumanoidRootPart.Velocity = flypos + (Vector3.new(0, mass + (flyup and flyverticalspeed.Value or 0) + (flydown and -flyverticalspeed.Value or 0), 0))
+						lplr.Character.HumanoidRootPart.CFrame = lplr.Character.HumanoidRootPart.CFrame + flypos2
+						     flyvelo = flypos + Vector3.new(0, mass + (flyup and flyverticalspeed.Value or 0) + (flydown and -flyverticalspeed.Value or 0), 0)
+					         end
 						flyvelo = flypos + Vector3.new(0, mass + (flyup and flyverticalspeed.Value or 0) + (flydown and -flyverticalspeed.Value or 0), 0)
 					end
 				end)
@@ -7386,7 +7394,7 @@ runcode(function()
 	})
 	flymode = fly.CreateDropdown({
 		Name = "Mode",
-		List = {"CFrame", "Normal"},
+		List = {"CFrame", "Normal", "test"},
 		Function = function() end
 	})
 	flyspeed = fly.CreateSlider({
