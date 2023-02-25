@@ -7342,6 +7342,7 @@ runcode(function()
 						realflyspeed = (flymode.Value == "Normal" and allowspeed == false and 20 or realflyspeed) * allowed
 						local flypos = entityLibrary.character.Humanoid.MoveDirection * (flymode.Value == "Normal" and realflyspeed or math.min(realflyspeed, 20 * getSpeedMultiplier()))
 						local flypos2 = (entityLibrary.character.Humanoid.MoveDirection * math.max((realflyspeed) - 20, 0)) * delta
+						local flypos3 = (entityLibrary.character.Humanoid.MoveDirection * math.max((realflyspeed) - 50, 1)) * delta
 						entityLibrary.character.HumanoidRootPart.Transparency = 0
 						if funny then 
 							entityLibrary.character.HumanoidRootPart.Velocity = flypos + (Vector3.new(0, mass + (flyup and flyverticalspeed.Value or 0) + (flydown and -flyverticalspeed.Value or 0), 0) * allowed)
@@ -7352,13 +7353,8 @@ runcode(function()
 							entityLibrary.character.HumanoidRootPart.CFrame = entityLibrary.character.HumanoidRootPart.CFrame + flypos2
 						end
 						if flymode.Value == "test" then
-						local flypos = lplr.Character.Humanoid.MoveDirection * math.clamp(flyspeed.Value, 1, 10)
-						local flypos2 = (lplr.Character.Humanoid.MoveDirection * math.clamp(flyspeed.Value - 10, 0, 1000)) * delta
-						lplr.Character.HumanoidRootPart.Transparency = 1
-						lplr.Character.HumanoidRootPart.Velocity = flypos + (Vector3.new(0, mass + (flyup and flyverticalspeed.Value or 0) + (flydown and -flyverticalspeed.Value or 0), 0))
-						lplr.Character.HumanoidRootPart.CFrame = lplr.Character.HumanoidRootPart.CFrame + flypos2
-						     flyvelo = flypos + Vector3.new(0, mass + (flyup and flyverticalspeed.Value or 0) + (flydown and -flyverticalspeed.Value or 0), 0)
-					         end
+					         entityLibrary.character.HumanoidRootPart.CFrame = entityLibrary.character.HumanoidRootPart.CFrame + flypos3
+						 end
 						flyvelo = flypos + Vector3.new(0, mass + (flyup and flyverticalspeed.Value or 0) + (flydown and -flyverticalspeed.Value or 0), 0)
 					end
 				end)
