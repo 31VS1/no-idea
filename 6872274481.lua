@@ -1245,8 +1245,10 @@ task.spawn(function()
 	end)
 end)
 
+local teleportedServers = false
 connectionstodisconnect[#connectionstodisconnect + 1] = lplr.OnTeleport:Connect(function(State)
-    if State == Enum.TeleportState.Started then
+	if (not teleportedServers) then
+		teleportedServers = true
 		local clientstorestate = bedwars.ClientStoreHandler and bedwars.ClientStoreHandler:getState() or {Party = {members = 0}}
 		local queuedstring = ''
 		if clientstorestate.Party and clientstorestate.Party.members and #clientstorestate.Party.members > 0 then
@@ -2570,118 +2572,6 @@ runcode(function()
 		Function = function() end
 	})
 
-	local targetstrafe = {Enabled = false}
-	local targetstrafespeed = {Value = 40}
-	local targetstrafejump = {Value = 40}
-	local targetstrafedistance = {Value = 12}
-	local targetstrafenum = 0
-	local targetstrafepos = Vector3.zero
-	local flip = false
-	local lastreal
-	local old = nil
-	local oldmove2
-	local part
-	local raycastparameters = RaycastParams.new()
-	raycastparameters.FilterType = Enum.RaycastFilterType.Whitelist
-	targetstrafe = GuiLibrary.ObjectsThatCanBeSaved.BlatantWindow.Api.CreateOptionsButton({
-		Name = "TargetStrafe",
-		Function = function(callback)
-			if callback then
-				local controlmodule = require(lplr.PlayerScripts.PlayerModule).controls
-				oldmove2 = controlmodule.moveFunction
-				controlmodule.moveFunction = function(self, movedir, facecam, ...)
-					if targetstrafing and targetstrafepos and entityLibrary.isAlive then 
-						movedir = (targetstrafepos - entityLibrary.character.HumanoidRootPart.Position).Unit
-						facecam = false
-					end
-					return oldmove2(self, movedir, facecam, ...)
-				end
-				task.spawn(function()
-					repeat
-						task.wait(0.1)
-						if (not targetstrafe.Enabled) then break end
-						local plr = GetNearestHumanoidToPosition(true, 18)
-						targetstrafing = false
-						if entityLibrary.isAlive and plr and (not GuiLibrary.ObjectsThatCanBeSaved["ScaffoldOptionsButton"]["Api"].Enabled) and (not GuiLibrary.ObjectsThatCanBeSaved["LongJumpOptionsButton"]["Api"].Enabled) and (not GuiLibrary.ObjectsThatCanBeSaved["FlyOptionsButton"]["Api"].Enabled) and longjumpticktimer <= tick() and (not spidergoinup) then
-							local veryoldpos = entityLibrary.character.HumanoidRootPart.CFrame.p
-							if plr ~= old then
-								old = plr
-								local otherone2 = CFrame.lookAt(plr.Character.HumanoidRootPart.Position, entityLibrary.character.HumanoidRootPart.Position)
-								local num = -math.atan2(otherone2.LookVector.Z, otherone2.LookVector.X) + math.rad(-90)
-								targetstrafenum = math.deg(num)
-							end
-							raycastparameters.FilterDescendantsInstances = {bedwarsblocks, collectionservice:GetTagged("spawn-cage"), workspace.SpectatorPlatform}
-							targetstrafing = false
-							lastreal = plr.Character.HumanoidRootPart.Position
-							local playerpos = Vector3.new(plr.Character.HumanoidRootPart.Position.X, entityLibrary.character.HumanoidRootPart.Position.Y, plr.Character.HumanoidRootPart.Position.Z)
-							local newpos = playerpos + CFrame.Angles(0, math.rad(targetstrafenum), 0).LookVector * targetstrafedistance.Value
-							local working = true
-							local newray3 = workspace:Raycast(playerpos, CFrame.Angles(0, math.rad(targetstrafenum), 0).LookVector * targetstrafedistance.Value, raycastparameters)
-							newpos = newray3 and (playerpos - newray3.Position) * 0.8 or newpos
-							local newray2 = workspace:Raycast(newpos, Vector3.new(0, -15, 0), raycastparameters)
-							if newray2 == nil then 
-								newray2 = workspace:Raycast(playerpos + (playerpos - newpos) * 0.4, Vector3.new(0, -15, 0), raycastparameters)
-								if newray2 then 
-									newpos = playerpos + ((playerpos - newpos) * 0.4)
-								end
-							end
-							if newray2 ~= nil then
-								local newray4 = workspace:Raycast(entityLibrary.character.HumanoidRootPart.Position, (entityLibrary.character.HumanoidRootPart.Position - newpos), raycastparameters)
-								if newray4 then 
-									flip = not flip
-								else
-									targetstrafepos = newpos
-									targetstrafing = true
-								end
-							else
-								flip = not flip
-							end
-							if working then
-								targetstrafenum = (flip and targetstrafenum - targetstrafespeed.Value or targetstrafenum + targetstrafespeed.Value)
-								if targetstrafenum >= 999999 then
-									targetstrafenum = 0
-								end
-								if targetstrafenum < -999999 then
-									targetstrafenum = 0
-								end
-							end
-						else
-							targetstrafing = false
-							old = nil
-							lastreal = nil
-						end
-					until (not targetstrafe.Enabled)
-				end)
-			else
-				targetstrafing = false
-				local controlmodule = require(lplr.PlayerScripts.PlayerModule).controls
-				controlmodule.moveFunction = oldmove2
-			end
-		end,
-		HoverText = "Automatically moves around attacking players"
-	})
-	targetstrafespeed = targetstrafe.CreateSlider({
-		Name = "Speed",
-		Min = 1,
-		Max = 80,
-		Default = 80,
-		Function = function() end
-	})
-	targetstrafejump = targetstrafe.CreateSlider({
-		Name = "Jump Height",
-		Min = 1,
-		Max = 20,
-		Default = 20,
-		Function = function() end
-	})
-	targetstrafedistance = targetstrafe.CreateSlider({
-		Name = "Distance",
-		Min = 1,
-		Max = 12,
-		Default = 8,
-		Function = function() end
-	})
-end)
 
 runcode(function()
 	local velohorizontal = {Value = 100}
@@ -3137,8 +3027,9 @@ runcode(function()
 	local nukerlegit = {Enabled = false}
 	local nukerown = {Enabled = false}
     local nukerluckyblock = {Enabled = false}
+	local nukerironore = {Enabled = false}
     local nukerbeds = {Enabled = false}
-	local nukercustom = {["RefreshValues"] = function() end, ["ObjectList"] = {}}
+	local nukercustom = {RefreshValues = function() end, ObjectList = {}}
 	local nukerconnection
 	local nukerconnection2
     local luckyblocktable = {}
@@ -3147,23 +3038,24 @@ runcode(function()
 		Function = function(callback)
             if callback then
 				for i,v in pairs(bedwarsblocks) do
-					if table.find(nukercustom["ObjectList"], v.Name) or (nukerluckyblock.Enabled and v.Name:find("lucky")) then
+					if table.find(nukercustom["ObjectList"], v.Name) or (nukerluckyblock.Enabled and v.Name:find("lucky")) or (nukerironore.Enabled and v.Name == "iron_ore") then
 						table.insert(luckyblocktable, v)
 					end
 				end
 				nukerconnection = collectionservice:GetInstanceAddedSignal("block"):Connect(function(v)
-                    if table.find(nukercustom["ObjectList"], v.Name) or (nukerluckyblock.Enabled and v.Name:find("lucky")) then
+                    if table.find(nukercustom["ObjectList"], v.Name) or (nukerluckyblock.Enabled and v.Name:find("lucky")) or (nukerironore.Enabled and v.Name == "iron_ore") then
                         table.insert(luckyblocktable, v)
                     end
                 end)
                 nukerconnection2 = collectionservice:GetInstanceRemovedSignal("block"):Connect(function(v)
-                    if table.find(nukercustom["ObjectList"], v.Name) or (nukerluckyblock.Enabled and v.Name:find("lucky")) then
+                    if table.find(nukercustom["ObjectList"], v.Name) or (nukerluckyblock.Enabled and v.Name:find("lucky")) or (nukerironore.Enabled and v.Name == "iron_ore") then
                         table.remove(luckyblocktable, table.find(luckyblocktable, v))
                     end
                 end)
                 task.spawn(function()
                     repeat
 						if (nukernofly.Enabled == false or GuiLibrary.ObjectsThatCanBeSaved["FlyOptionsButton"]["Api"].Enabled == false) then
+							local broke = false
 							if nukerbeds.Enabled then
 								for i, obj in pairs(collectionservice:GetTagged("bed")) do
 									if entityLibrary.isAlive then
@@ -3173,6 +3065,7 @@ runcode(function()
 												if tool and bedwars.ItemTable[tool.Name]["breakBlock"] then
 													local res, amount = getbestside(obj.Position)
 													local res2, amount2 = getbestside(obj.Position + Vector3.new(0, 0, 3))
+													broke = true
 													bedwars["breakBlock"]((amount < amount2 and obj.Position or obj.Position + Vector3.new(0, 0, 3)), nukereffects.Enabled, (amount < amount2 and res or res2), false, nukeranimation.Enabled)
 													break
 												end
@@ -3182,6 +3075,7 @@ runcode(function()
 								end
 							end
 							for i, obj in pairs(luckyblocktable) do
+								if broke then break end
 								if entityLibrary.isAlive then
 									if obj and bedwars.BlockController:isBlockBreakable({blockPosition = obj.Position / 3}, lplr) and obj.Parent ~= nil then
 										if ((oldcloneroot and oldcloneroot.Position or entityLibrary.LocalPosition or entityLibrary.character.HumanoidRootPart.Position) - obj.Position).magnitude <= nukerrange.Value and (nukerown.Enabled or obj:GetAttribute("PlacedByUserId") ~= lplr.UserId) then
@@ -3246,14 +3140,33 @@ runcode(function()
     nukerluckyblock = Nuker.CreateToggle({
 		Name = "Break LuckyBlocks",
 		Function = function(callback) 
-			luckyblocktable = {}
-			for i,v in pairs(bedwarsblocks) do
-				if table.find(nukercustom["ObjectList"], v.Name) or (nukerluckyblock.Enabled and v.Name:find("lucky")) then
-					table.insert(luckyblocktable, v)
+			if callback then 
+				luckyblocktable = {}
+				for i,v in pairs(bedwarsblocks) do
+					if table.find(nukercustom["ObjectList"], v.Name) or (nukerluckyblock.Enabled and v.Name:find("lucky")) or (nukerironore.Enabled and v.Name == "iron_ore") then
+						table.insert(luckyblocktable, v)
+					end
 				end
+			else
+				luckyblocktable = {}
 			end
 		 end,
 		Default = true
+	})
+	nukerironore = Nuker.CreateToggle({
+		Name = "Break IronOre",
+		Function = function(callback) 
+			if callback then 
+				luckyblocktable = {}
+				for i,v in pairs(bedwarsblocks) do
+					if table.find(nukercustom["ObjectList"], v.Name) or (nukerluckyblock.Enabled and v.Name:find("lucky")) or (nukerironore.Enabled and v.Name == "iron_ore") then
+						table.insert(luckyblocktable, v)
+					end
+				end
+			else
+				luckyblocktable = {}
+			end
+		end
 	})
 	nukercustom = Nuker.CreateTextList({
 		Name = "NukerList",
@@ -7419,7 +7332,6 @@ runcode(function()
 	flypop = fly.CreateToggle({
 		Name = "Pop Balloon",
 		Function = function() end, 
-		Default = true,
 		HoverText = "Pops balloons when fly is disabled."
 	})
 	local oldcamupdate
@@ -11637,3 +11549,5 @@ task.spawn(function()
 		AutoLeave.ToggleButton(false)
 	end
 end)
+
+ 
