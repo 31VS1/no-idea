@@ -2161,31 +2161,6 @@ end)
 
 
 runcode(function()
-local TimeChanger = {Enabled = false}
-TimeChanger = GuiLibrary.ObjectsThatCanBeSaved.RenderWindow.Api.CreateOptionsButton({
-	Name = "TimeChanger",
-	Function = function(callback)
-		if callback then
-			task.spawn(function()
-			repeat
-                             game.Lighting.TimeOfDay = time.Value
-		       until TimeChanger.Enabled == false
-	            end)
-		end
-	end, 
-	HoverText = "Trollage",
-     ["ExtraText"] = function() return "Trollage" end
-})
-	time = TimeChanger.CreateSlider({
-		Name = "time",
-		Min = 1,
-		Max = 13,
-		Function = function() end
-	})
-end)
-
-
-runcode(function()
 local Visuals = {Enabled = false}
 Visuals = GuiLibrary.ObjectsThatCanBeSaved.RenderWindow.Api.CreateOptionsButton({
 	Name = "Visuals",
