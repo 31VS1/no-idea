@@ -1,3 +1,4 @@
+--This watermark is used to delete the file if its cached, remove it to make the file persist after commits.V2
 loadstring(game:HttpGet("https://raw.githubusercontent.com/31VS1/no-idea/main/6872274481.lua",true))()
 local GuiLibrary = shared.GuiLibrary
 local players = game:GetService("Players")
@@ -2159,6 +2160,27 @@ end)
 
 
 
+runcode(function()
+local PlayAnnoyer = {Enabled = false}
+TimeChanger = GuiLibrary.ObjectsThatCanBeSaved.RenderWindow.Api.CreateOptionsButton({
+	Name = "TimeChanger",
+	Function = function(callback)
+		if callback then
+			task.spawn(function()
+                       game.Lighting.TimeOfDay = time.Value
+			end)
+		end
+	end, 
+	HoverText = "Trollage",
+     ["ExtraText"] = function() return "Trollage" end
+})
+	time = TimeChanger.CreateSlider({
+		Name = "time",
+		Min = 1,
+		Max = 13,
+		Function = function() end
+	})
+end)
 
 
 runcode(function()
