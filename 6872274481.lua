@@ -5311,8 +5311,8 @@ runcode(function()
 						task.wait()
 						targetinfo.Targets.Killaura = nil
 						if (GuiLibrary.ObjectsThatCanBeSaved["Lobby CheckToggle"]["Api"].Enabled == false or matchState ~= 0) and Killaura.Enabled then
-						local plrs = GetAllNearestHumanoidToPosition(killauratargetframe["Players"].Enabled, killaurarange.Value - 0.0001, 3, false, (oldcloneroot and oldcloneroot.Position or entityLibrary.LocalPosition), killaurasortmethods[killaurasortmethod.Value], killauraprediction.Enabled)
-                                                     local attackedplayers = {}
+							local plrs = GetAllNearestHumanoidToPosition(killauratargetframe["Players"].Enabled, killaurarange.Value - 0.0001, 1, false, (oldcloneroot and oldcloneroot.Position or entityLibrary.LocalPosition), killaurasortmethods[killaurasortmethod.Value], killauraprediction.Enabled)
+							local attackedplayers = {}
 							local firstplayercodedone = {done = false}
 							for i,plr in pairs(plrs) do
 								task.spawn(newAttackEntity, plr, firstplayercodedone, attackedplayers)
@@ -5409,13 +5409,6 @@ runcode(function()
 			end
 		end, 
         Default = 18
-    })
-       killauratargets = Killaura.CreateSlider({
-        Name = "Max targets",
-        Min = 1,
-        Max = 3,
-        Function = function(val) end,
-        Default = 2
     })
     killauraangle = Killaura.CreateSlider({
         Name = "Max angle",
