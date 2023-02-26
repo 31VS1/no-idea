@@ -7185,10 +7185,10 @@ runcode(function()
 						allowed = ((lplr.Character:GetAttribute("InflatedBalloons") and lplr.Character:GetAttribute("InflatedBalloons") > 0) or matchState == 2 or megacheck) and 1 or 0
 						local mass = (entityLibrary.character.HumanoidRootPart:GetMass() - 1.4) * (delta * 100)
 						local realflyspeed = flyspeed.Value
-						mass = mass + (allowed > 0 and 10 or  5) * (flytog and -1 or 1)
+						mass = mass + (allowed > 0 and 10 or 0.1) * (flytog and -1 or 1)
 						if flytogtick <= tick() then
 							flytog = not flytog
-							flytogtick = tick() + (allowed > 0 and 0.2 or 0.06)
+							flytogtick = tick() + (allowed > 0 and 0.2 or 0.2)
 						end
 						if flyacprogressbarframe then
 							flyacprogressbarframe.Visible = allowed <= 0
