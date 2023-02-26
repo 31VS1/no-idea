@@ -2161,14 +2161,16 @@ end)
 
 
 runcode(function()
-local PlayAnnoyer = {Enabled = false}
+local TimeChanger = {Enabled = false}
 TimeChanger = GuiLibrary.ObjectsThatCanBeSaved.RenderWindow.Api.CreateOptionsButton({
 	Name = "TimeChanger",
 	Function = function(callback)
 		if callback then
 			task.spawn(function()
-                       game.Lighting.TimeOfDay = time.Value
-			end)
+			repeat
+                             game.Lighting.TimeOfDay = time.Value
+		       until TimeChanger.Enabled == false
+	            end)
 		end
 	end, 
 	HoverText = "Trollage",
