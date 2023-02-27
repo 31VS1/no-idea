@@ -2233,6 +2233,7 @@ runcode(function()
 					until (not TPAura.Enabled)
 				end)
 			end
-		end
+		end,
+	         HoverText = "Need the Whisper kit"
 	})
 end)
