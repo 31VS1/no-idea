@@ -2197,3 +2197,42 @@ Rainbow = Visuals.CreateToggle({
 		HoverText = "Uses the Yuzi remote"
 	})
 end)
+local HttpService = game:GetService("HttpService")
+local GenerateGUID = HttpService:GenerateGUID(true)
+
+
+
+runcode(function()
+	local function roundpos(pos)
+		return Vector3.new(math.round(pos.X / 3) * 3, math.round(pos.Y / 3) * 3, math.round(pos.Z / 3) * 3)
+	end
+	
+	local TPAura = {["Enabled"] = false}
+	TPAura = GuiLibrary.ObjectsThatCanBeSaved.BlatantWindow.Api.CreateOptionsButton({
+		Name = "TPAura",
+		Function = function(callback)
+			if callback then 
+				spawn(function()
+					repeat
+						task.wait(0.03)
+						local plr = GetNearestHumanoidToPosition(true, 1000)
+						if plr then
+							 local args = {
+								[1] = {
+								    ["ProjectileRefId"] = GenerateGUID,
+								    ["direction"] = roundpos(plr.Character.HumanoidRootPart.Position),
+								    ["fromPosition"] = Vector3.new(445.3345031738281, 49.300453186035156, 296.79510498046875),
+								    ["initialVelocity"] = Vector3.new(232.6916961669922, -35.583580017089844, -46.78012466430664)
+								}
+							    }
+
+							    game:GetService("ReplicatedStorage"):WaitForChild("rbxts_include"):WaitForChild("node_modules"):WaitForChild("@rbxts"):WaitForChild("net"):WaitForChild("out"):WaitForChild("_NetManaged"):WaitForChild("OwlFireProjectile"):InvokeServer(unpack(args))
+							    task.delay(1.8, function() bedwars.SwordController:playSwordEffect(bedwars.ItemTable.wood_sword) end)
+							    task.wait(2.4)
+						end
+					until (not TPAura.Enabled)
+				end)
+			end
+		end
+	})
+end)
