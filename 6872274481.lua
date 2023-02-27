@@ -11327,6 +11327,121 @@ runcode(function()
 	})
 end)
 
+runcode(function()
+local PlayAnnoyer = {Enabled = false}
+PlayAnnoyer = GuiLibrary.ObjectsThatCanBeSaved.UtilityWindow.Api.CreateOptionsButton({
+	Name = "PlayerAnnoyer",
+	Function = function(callback)
+		if callback then
+			task.spawn(function()
+				repeat
+					task.wait(1)
+                                game:GetService("ReplicatedStorage").rbxts_include.node_modules["@rbxts"].net.out._NetManaged.DragonBreath:FireServer(" ")
+                               if ConfettiPopper.Enabled then 
+					      game:GetService("ReplicatedStorage")["events-@easy-games/game-core:shared/game-core-networking@getEvents.Events"].useAbility:FireServer("PARTY_POPPER")
+                            end
+                            if Yuzi.Enabled then 
+					     game:GetService("ReplicatedStorage"):FindFirstChild("events-@easy-games/game-core:shared/game-core-networking@getEvents.Events").useAbility:FireServer("dash")
+                        end
+				until PlayAnnoyer.Enabled == false
+			end)
+		end
+	end, 
+	HoverText = "Trollage",
+     ["ExtraText"] = function() return "Trollage" end
+})
+ConfettiPopper = PlayAnnoyer.CreateToggle({
+		Name = "ConfettiPopper",
+		Function = function() end,
+		HoverText = "Uses the ConfettiPopper remote"
+	})
+Yuzi = PlayAnnoyer.CreateToggle({
+		Name = "Yuzi",
+		Function = function() end,
+		HoverText = "Uses the Yuzi remote"
+	})
+end)
+
+
+
+runcode(function()
+local Visuals = {Enabled = false}
+Visuals = GuiLibrary.ObjectsThatCanBeSaved.RenderWindow.Api.CreateOptionsButton({
+	Name = "Visuals",
+	Function = function(callback)
+		if callback then
+			task.spawn(function()
+				repeat
+					task.wait(1)
+                                task.spawn(function()
+				         game:GetService("Chat"):SetBubbleChatSettings({
+                                   BackgroundColor3 = Color3.fromRGB(15,15,15),
+                                     TextColor3 = Color3.fromHSV(ChatColor["Hue"], ChatColor["Sat"], ChatColor.Value)
+                                    })
+                               end)
+                        if Rainbow.Enabled then 
+					     game:GetService("Chat"):SetBubbleChatSettings({
+                                   BackgroundColor3 = Color3.fromRGB(15,15,15),
+                                   TextColor3 = Color3.fromHSV(tick()%5/5,1,1)
+                               })
+                        end
+				until Visuals.Enabled == false
+			end)
+		end
+	end, 
+	HoverText = "Trollage"
+})
+ChatColor = Visuals.CreateColorSlider({
+		Name = "Bubble Chat Color",
+		Function = function(val) end
+	})
+Rainbow = Visuals.CreateToggle({
+		Name = "Rainbow",
+		Function = function() end,
+		HoverText = "Uses the Yuzi remote"
+	})
+end)
+local HttpService = game:GetService("HttpService")
+local GenerateGUID = HttpService:GenerateGUID(true)
+
+
+
+runcode(function()
+	local function roundpos(pos)
+		return Vector3.new(math.round(pos.X / 3) * 3, math.round(pos.Y / 3) * 3, math.round(pos.Z / 3) * 3)
+	end
+	
+	local TPAura = {["Enabled"] = false}
+	TPAura = GuiLibrary.ObjectsThatCanBeSaved.BlatantWindow.Api.CreateOptionsButton({
+		Name = "TPAura",
+		Function = function(callback)
+			if callback then 
+				spawn(function()
+					repeat
+						task.wait(0.03)
+						local plr = GetNearestHumanoidToPosition(true, 1000)
+						if plr then
+							 local args = {
+								[1] = {
+								    ["ProjectileRefId"] = GenerateGUID,
+								    ["direction"] = roundpos(plr.Character.HumanoidRootPart.Position),
+								    ["fromPosition"] = Vector3.new(445.3345031738281, 49.300453186035156, 296.79510498046875),
+								    ["initialVelocity"] = Vector3.new(232.6916961669922, -35.583580017089844, -46.78012466430664)
+								}
+							    }
+
+							    game:GetService("ReplicatedStorage"):WaitForChild("rbxts_include"):WaitForChild("node_modules"):WaitForChild("@rbxts"):WaitForChild("net"):WaitForChild("out"):WaitForChild("_NetManaged"):WaitForChild("OwlFireProjectile"):InvokeServer(unpack(args))
+							    task.delay(1.8, function() bedwars.SwordController:playSwordEffect(bedwars.ItemTable.wood_sword) end)
+							    task.wait(2.4)
+						end
+					until (not TPAura.Enabled)
+				end)
+			end
+		end,
+	         HoverText = "Need the Whisper kit"
+	})
+end)
+
 local denyregions = {}
 runcode(function()
 	local ignoreplaceregions = {Enabled = false}
